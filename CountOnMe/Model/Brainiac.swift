@@ -10,104 +10,95 @@ import Foundation
 import UIKit
 
 
-protocol VCAlert: ViewController {
-    func presentVCAlert(with: String)
+enum operationSymbol {
+    case plus, minus, multiply, divided
 }
 
-class Brainiac {
-    private var accumulator = 0.0
-    private var internalProgram = [AnyObject]()
-    /// Store numbers
-    var numberArray = [String()]
-    
-    weak var delegateAlertMessage: VCAlert?
-    
-    
-    private var operations: Dictionary<String,Operation> = [
-        "÷" : Operation.binaryOperation({ $0 / $1}),
-        "+" : Operation.binaryOperation({ $0 + $1}),
-        "−" : Operation.binaryOperation({ $0 - $1}),
-        "×" : Operation.binaryOperation({ $0 * $1}),
-        "=" : Operation.Equals
-        ]
-    
-    private enum Operation {
-        case binaryOperation((Double, Double) -> Double)
-        case Equals
-    }
-    
-    func setOperand(_ operand: Double) {
-    accumulator = operand
-        internalProgram.append(operand as AnyObject)
-    }
-    
-   
 
-    func performOperation(_ symbol : String){
-        internalProgram.append(symbol as AnyObject)
-        
-        if let Operation = operations[symbol]{
-            switch Operation {
-             case .binaryOperation(let function):
-                executePendingBinaryOperation()
-                pending = PendingBinaryOperationInfo(binaryFunction: function, firstOperand: accumulator)
-            case .Equals:
-                executePendingBinaryOperation()
-            }}
-        }
+class Brainiac {
+     
+    // MARK: - Properties
+
+    var numberArray = [String()]
+    var operandSymbol = ["+"]
     
-    private func executePendingBinaryOperation (){
-        if pending != nil {
-            accumulator = pending!.binaryFunction(pending!.firstOperand,accumulator)
-            pending =  nil
-            
+    weak var delegateAlertMessage: VCAlertDelegate?
+    
+    // MARK: - append numbers and operation symbols
+
+    /// - parameter newNumber: The number input by the user
+ 
+    func operationsNumbers(_ newNumber: Int){
+        if let number = numberArray.last {
+            var numberMutable = number
+            numberMutable += ("\(newNumber)")
+                numberArray[numberArray.count-1] = numberMutable
         }
     }
-    private var pending: PendingBinaryOperationInfo?
+    /**
+     Append an operation symbol to an array
+     - parameter symbol: A binary operation symbol input by the user
+     */
     
-    private struct PendingBinaryOperationInfo {
-        var binaryFunction: (Double, Double) -> Double
-        var firstOperand: Double
-        
+    func appendOperandSymbol(_ symbol : operationSymbol){
+        switch symbol {
+        case .plus:
+            operandSymbol.append("+")
+            numberArray.append("")
+        case .minus:
+            operandSymbol.append("-")
+            numberArray.append("")
+        case .multiply:
+            operandSymbol.append("*")
+            numberArray.append("")
+        case .divided:
+            operandSymbol.append("/")
+            numberArray.append("")
+        }
     }
     
-    typealias PropertyList = AnyObject
-    
-    var program: PropertyList {
-        get {
-            return internalProgram as Brainiac.PropertyList
+    // MARK: - calculate
+
+    func result() -> Int {
+        var result = 0
+        for (index, stringNumber) in numberArray.enumerated() {
+            operandBrain(stringNumber, index, &result)
         }
-        set {
-            clear()
-            if let arrayOfOps = newValue as? [AnyObject]{
-                for op in arrayOfOps{
-                    if let operand = op as? Double {
-                      setOperand(operand)
-                    } else if let Operation = op as? String {
-                        performOperation(Operation)
-                    }
-                
-                }
+        return result
+    }
+   
+    func operandBrain(_ stringNumber: String, _ index: Int , _ result: inout Int ) {
+        if let number = Int(stringNumber) {
+            if operandSymbol[index] == "+" {
+                result += number
+            } else if operandSymbol[index] == "-" {
+                result -= number
+            } else if operandSymbol[index] == "*" {
+                result *= number
+            } else if operandSymbol[index] == "/" {
+                result /= number
+            }
+        }
+    }
+    
+    // MARK: - check validity
+
+    func checkappendOperand(with symbol: operationSymbol) -> Bool {
+        if let stringNumber = numberArray.last {
+            if stringNumber.isEmpty {
+                return false
             }
             
         }
-    }
-    func clear () {
-        accumulator = 0.0
-        pending = nil
-        
-        internalProgram.removeAll()
+        appendOperandSymbol(symbol)
+        return true
     }
     
-    /**
-     Verify the validity of the binary operations to be calculated.
-     Call delegate method when invalid
-     - Returns: Bool
-     */
     func isExpressionCorrect() -> Bool {
         if numberArray.count == 1 {
             delegateAlertMessage?.presentVCAlert(with: "Démarrez un nouveau calcul !")
             return false
+            
         } else if numberArray.last == "" {
             delegateAlertMessage?.presentVCAlert(with: "Entrez une expression correcte !")
             return false
@@ -115,22 +106,10 @@ class Brainiac {
         return true
     }
     
-
-  var result: Double {
-        get {
-            return accumulator
-            
-        }
+    func clearArrays() {
+        numberArray = [String()]
+        operandSymbol = ["+"]
     }
     
 }
 
-extension VCAlert {
-    func presentVCAlert(with message: String) {
-        let alertVC = UIAlertController(title: "Erreur !", message: message, preferredStyle: .alert)
-
-        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-
-        self.present(alertVC, animated: true, completion: nil)
-    }
-}

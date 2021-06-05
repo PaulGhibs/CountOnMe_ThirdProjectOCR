@@ -178,9 +178,6 @@
                                         <state key="normal" title="+">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
-                                        <connections>
-                                            <action selector="tappedAdditionButton:" destination="06T-jn-bOD" eventType="touchUpInside" id="dKm-Bq-Elm"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tkz-eF-MUb" userLabel="x">
                                         <rect key="frame" x="70" y="0.0" width="63" height="63"/>
@@ -192,9 +189,6 @@
                                         <state key="normal" title="x">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
-                                        <connections>
-                                            <action selector="tappedAdditionButton:" destination="06T-jn-bOD" eventType="touchUpInside" id="0bK-MG-Jm3"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tku-AG-OLP">
                                         <rect key="frame" x="140" y="0.0" width="63" height="63"/>
@@ -206,9 +200,6 @@
                                         <state key="normal" title="÷">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
-                                        <connections>
-                                            <action selector="tappedAdditionButton:" destination="06T-jn-bOD" eventType="touchUpInside" id="8Tq-B2-6ep"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aeT-SV-e06">
                                         <rect key="frame" x="210" y="0.0" width="63" height="63"/>
@@ -217,9 +208,6 @@
                                         <state key="normal" title="-">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
-                                        <connections>
-                                            <action selector="tappedSubstractionButton:" destination="06T-jn-bOD" eventType="touchUpInside" id="6K2-fy-Ioh"/>
-                                        </connections>
                                     </button>
                                     <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zfj-mb-W2S">
                                         <rect key="frame" x="280" y="0.0" width="63" height="63"/>

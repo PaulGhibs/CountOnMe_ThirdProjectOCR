@@ -15,6 +15,7 @@
 		1FA43BE8224E569A00F565CB /* SimpleCalcTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA43BE7224E569A00F565CB /* SimpleCalcTests.swift */; };
 		1FA43BF3224E569A00F565CB /* SimpleCalcUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA43BF2224E569A00F565CB /* SimpleCalcUITests.swift */; };
 		61037DB12666A42600C78881 /* Brainiac.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61037DB02666A42600C78881 /* Brainiac.swift */; };
+		61CBFB39266BC524008E8208 /* VCAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61CBFB38266BC524008E8208 /* VCAlert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		1FA43BF4224E569A00F565CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		61037DB02666A42600C78881 /* Brainiac.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Brainiac.swift; sourceTree = "<group>"; };
 		618092EB266784AA009D6D98 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		61CBFB38266BC524008E8208 /* VCAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCAlert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				61037DB02666A42600C78881 /* Brainiac.swift */,
+				61CBFB38266BC524008E8208 /* VCAlert.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FA43BD5224E569900F565CB /* ViewController.swift in Sources */,
+				61CBFB39266BC524008E8208 /* VCAlert.swift in Sources */,
 				1FA43BD3224E569900F565CB /* AppDelegate.swift in Sources */,
 				61037DB12666A42600C78881 /* Brainiac.swift in Sources */,
 			);
