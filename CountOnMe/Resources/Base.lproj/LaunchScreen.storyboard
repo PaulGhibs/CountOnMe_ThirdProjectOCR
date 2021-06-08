@@ -17,19 +17,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appstore" translatesAutoresizingMaskIntoConstraints="NO" id="1qP-Hq-Mtt">
-                                <rect key="frame" x="153" y="346" width="108" height="154"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="1qP-Hq-Mtt" secondAttribute="height" multiplier="54:77" id="KKH-mJ-m6g"/>
-                                </constraints>
+                                <rect key="frame" x="110" y="353" width="194" height="190"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" red="0.25213971730000001" green="0.53196442129999999" blue="0.58824658389999995" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.0" green="0.63529411764705879" blue="0.58431372549019611" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="1qP-Hq-Mtt" firstAttribute="width" secondItem="1qP-Hq-Mtt" secondAttribute="height" multiplier="54:77" id="AmK-Qr-RFs"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="1qP-Hq-Mtt" secondAttribute="bottom" constant="362" id="KDA-7I-VDZ"/>
-                            <constraint firstItem="1qP-Hq-Mtt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="153" id="PXH-RX-LSb"/>
-                            <constraint firstItem="1qP-Hq-Mtt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="302" id="X42-81-vpL"/>
+                            <constraint firstItem="1qP-Hq-Mtt" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="Z2m-La-66e"/>
+                            <constraint firstItem="1qP-Hq-Mtt" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="110" id="heC-2f-0KY"/>
+                            <constraint firstItem="1qP-Hq-Mtt" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="nEk-J2-cPA"/>
+                            <constraint firstItem="1qP-Hq-Mtt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="309" id="vc8-Hm-Ivw"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -39,6 +36,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="appstore" width="1024" height="1024"/>
+        <image name="appstore" width="96" height="96"/>
     </resources>
 </document>
