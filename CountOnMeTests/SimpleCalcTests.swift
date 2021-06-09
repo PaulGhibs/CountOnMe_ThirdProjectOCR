@@ -7,21 +7,31 @@
 //
 
 import XCTest
-@testable import SimpleCalc
+@testable import P5_01_Xcode
 
-class SimpleCalcTests: XCTestCase {
+class P5_01_XcodeTests: XCTestCase {
+    var calculator: Brainiac!
+    
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        super.setUp()
+        calculator = Brainiac()
     }
 
+    
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        calculator = nil
     }
 
-    func testExample() {
+    func testGivenForStringNumber_WhenAddingNumber1_ThenNumberisShowed() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        let stringNumber = "1"
+        calculator.addStringToNumber(stringNumber: stringNumber)
+        XCTAssertEqual(calculator.elementTextView, "1")
+        
     }
 
     func testPerformanceExample() {

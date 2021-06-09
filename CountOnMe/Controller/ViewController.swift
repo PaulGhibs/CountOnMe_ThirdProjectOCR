@@ -10,7 +10,7 @@
 import UIKit
 
 
-class CalculatorViewController: UIViewController {
+class CentralViewController: UIViewController {
     @IBOutlet private weak var textView: UITextView!
     @IBOutlet private var numberButtons: [UIButton]!
     @IBOutlet private var operatorButtons: [UIButton]!
@@ -24,7 +24,7 @@ class CalculatorViewController: UIViewController {
     }
 }
 
-private extension CalculatorViewController {
+private extension CentralViewController {
     /// View actions
     @IBAction func tappedNumberButton(_ sender: UIButton) {
         guard let numberText = sender.title(for: .normal)
@@ -33,7 +33,7 @@ private extension CalculatorViewController {
     }
     
     @IBAction func tappedACButton(_ sender: Any) {
-        calculator.reset()
+        calculator.clearText()
     }
     
     
@@ -49,7 +49,7 @@ private extension CalculatorViewController {
 }
 
 /// Display Alert when there is an error, or if not : the result of the calcul.
-extension CalculatorViewController: ModelDelegate {
+extension CentralViewController: ModelDelegate {
     func didReceiveData(_ data: String) {
         if data == "result" {
             textView.text = calculator.elementTextView

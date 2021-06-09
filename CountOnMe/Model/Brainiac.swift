@@ -7,18 +7,14 @@
 //
 
 import Foundation
-/// Using protocol ModelDelegate to sending information to the controller
+// MARK: - Using protocol ModelDelegate to sending information to the controller
 protocol ModelDelegate: AnyObject {
     func didReceiveData(_ data: String)
 }
 
 class Brainiac {
-    weak var delegate: ModelDelegate?
-    
-    private func sendToController(data: String) {
-        delegate?.didReceiveData(data)
-    }
-    
+    // Enum
+    // situations: results given or error messages
     private enum ShowSituation: String {
         case isIncorrect = " Expression is incorrect "
         case haveNotEnoughElement = " Missing element to generate calcul "
@@ -27,22 +23,20 @@ class Brainiac {
         case unknowOperator = " Sorry, this symbol do not exist "
         case result = "result"
     }
-    
-    /// create elements var as Array that contains only the user input, and index them
+    // MARK: - Instances
+    // delegate call for receiveing data
+    weak var delegate: ModelDelegate?
+    // create elements var as Array that contains only the user input, and index them
     var elements: [String] {
         return elementTextView.split(separator: " ").map { "\($0)" }
     }
-    
-    /// this var is used to modify the value during the operation and send to the controller for display or display an Error
+    // this var is used to modify the value during the operation and send to the controller for display or display an Error
     var elementTextView: String = "1 + 1 = 2" {
         didSet {
             sendToController(data: ShowSituation.result.rawValue)
         }
     }
-    
-    // MARK: - check expression validity
-    
-    /// different checking error possible
+    //  check expression validity
     private var isExpressionCorrect: Bool {
         return elements.last != "+" && elements.last != "-" && elements.last != "x" && elements.last != "÷"
     }
@@ -52,10 +46,12 @@ class Brainiac {
     private func expressionHaveResult(expression: String) -> Bool {
         return expression.firstIndex(of: "=") != nil
     }
+    // Boolean : different checking error possible
     private var canAddOperator: Bool {
         return elements.last != "+" && elements.last != "-" && elements.last != "x" && elements.last != "÷"
     }
-    
+    // MARK: - Methods
+    // appending textview with elements tapped
     func addStringToNumber(stringNumber: String) {
         if expressionHaveResult(expression: elementTextView) {
             elementTextView = ""
@@ -63,8 +59,7 @@ class Brainiac {
             elementTextView += stringNumber
     }
     
-    // MARK: - append numbers and operation symbols
-
+    //  append numbers and operation symbols
     func addOperand(operationSymbol: String) {
         restoreLastResult(operationSymbol: operationSymbol)
         if canAddOperator {
@@ -82,28 +77,14 @@ class Brainiac {
                 elementTextView = "= Error"
             }
         } else {
-            /// permission to Change the operator Symbol, have to remove last entry
+            // permission to Change the operator Symbol, have to remove last entry
             elementTextView.removeLast(3)
             elementTextView += (" \(operationSymbol) ")
         }
     }
-    
-    /// restore last result if user want to use  it for a new calcul
-    private func restoreLastResult(operationSymbol: String) {
-        if expressionHaveResult(expression: elementTextView) || elementTextView == "" {
-            if elementTextView.prefix(7) == "= Error" || elementTextView == "" {
-                    delegate?.didReceiveData(ShowSituation.isIncorrect.rawValue)
-                    elementTextView = "= Error"
-            } else if let lastElement = elements.last {
-                elementTextView = lastElement
-            }
-        }
-    }
-    
-    // MARK: - check operation validity
 
-    
-    func beforeChecking() {
+    // check operation before sending to controller
+     func beforeChecking() {
         guard isExpressionCorrect else {
             return sendToController(data: ShowSituation.isIncorrect.rawValue)
         }
@@ -117,9 +98,19 @@ class Brainiac {
         var operationsToReduce = elements
         calculate(operationsToReduce: &operationsToReduce)
     }
-    
-    // MARK: - calculate
-    /// using inout to allow transform operationsToReduce in this function and in his caller
+    // restore last result if user want to use  it for a new calcul
+    private func restoreLastResult(operationSymbol: String) {
+        if expressionHaveResult(expression: elementTextView) || elementTextView == "" {
+            if elementTextView.prefix(7) == "= Error" || elementTextView == "" {
+                    delegate?.didReceiveData(ShowSituation.isIncorrect.rawValue)
+                    elementTextView = "= Error"
+            } else if let lastElement = elements.last {
+                elementTextView = lastElement
+            }
+        }
+    }
+    // calculate the numbers and operand used by the users  for the operation
+    // using inout to allow transform operationsToReduce in this function and in his caller
     private func calculate(operationsToReduce: inout [String]) {
         while operationsToReduce.count > 1 {
             var place = 0
@@ -149,8 +140,7 @@ class Brainiac {
         }
         afterChecking(operationsToReduce: operationsToReduce)
     }
-    
-    /// last checking before sending information to the controller
+    // last checking before sending information to the controller
     private func afterChecking(operationsToReduce: [String]) {
         if operationsToReduce.first == "inf" || operationsToReduce.first == "-inf" || operationsToReduce.first == "-nan" {
             sendToController(data: ShowSituation.divisionByZero.rawValue)
@@ -159,8 +149,13 @@ class Brainiac {
             elementTextView += " = \(operationsToReduce.first ?? "= Error")"
         }
     }
-    // MARK: - reset
-    func reset() {
+    // data send from the controller
+    private func sendToController(data: String) {
+        delegate?.didReceiveData(data)
+    }
+    
+    // reset textView and show a clear screen
+    func clearText() {
         elementTextView = ""
     }
 }
